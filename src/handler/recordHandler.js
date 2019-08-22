@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 // this class contains handler functions.
 const customError = require('./../infrastructure/error/custom')
-
+const Moment = require('moment')
 // fixme: must be global handler thing i think ?
 var RecordService = null
 
@@ -23,10 +23,19 @@ class RecordHandler {
     if (!startDate || !endDate || !minCount || !maxCount) {
       throw customError.InvalidRecordBody()
     }
-    let startDateType = new Date(startDate)
-    let endDateType = new Date(endDate)
+    let format = [
+      Moment.ISO_8601,
+      'YYYY-DD-MM'
+    ]
 
-    const Records = await RecordService.getRecordsByDateAndLimit(startDateType, endDateType, minCount, maxCount)
+    let startDateType = new Moment(startDate, format, true)
+    let endDateType = new Moment(endDate, format, true)
+
+    if (!startDateType.isValid() || !endDateType.isValid()) {
+      throw customError.InvalidRecordBody()
+    }
+
+    const Records = await RecordService.getRecordsByDateAndLimit(startDateType.toDate(), endDateType.toDate(), minCount, maxCount)
     const ResponseData = new RecordResponseData(Records)
 
     res.json(ResponseData)
