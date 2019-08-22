@@ -1,5 +1,5 @@
 
-var RecordDomain = require('../../../domain/Record')
+var RecordDomain = require('../../../domain/record')
 
 class MockFilledRecordRepository {
   async getRecordsBy (startDate, endDate, minCount, maxCount) {

@@ -2,7 +2,7 @@
 // This class is implemented for mongo
 
 var mongoose = require('mongoose')
-var RecordDomain = require('../../../domain/Record')
+var RecordDomain = require('../../../domain/record')
 
 var RecordSchema = new mongoose.Schema({
   key: String,
