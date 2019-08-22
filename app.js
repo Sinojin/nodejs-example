@@ -1,22 +1,22 @@
-
+const path = require("path")
 // database
 // mongo
-const { CreateMongoConnection } = require('./src/infrastructure/mongodb')
+const { CreateMongoConnection } = require(path.join(__dirname, '/src/infrastructure/mongodb'))
 // creating mongo connection
 CreateMongoConnection()
 
 // Repositories
-const RecordRepository = require('./src/domain/repository/recordRepository')
-const MongoRecordRepository = require('./src/infrastructure/repository/mongo/recordRepository')
+const RecordRepository = require(path.join(__dirname, '/src/domain/repository/recordRepository'))
+const MongoRecordRepository = require(path.join(__dirname, '/src/infrastructure/repository/mongo/recordRepository'))
 
 // Services
-const RecordService = require('./src/service/recordService')
+const RecordService = require(path.join(__dirname, '/src/service/recordService'))
 
 // Handlers
-const RecordHandler = require('./src/handler/recordHandler')
+const RecordHandler = require(path.join(__dirname, '/src/handler/recordHandler'))
 
 // ExpressApp to serve
-const ExpressApp = require('./src/infrastructure/server/express')
+const ExpressApp = require(path.join(__dirname, '/src/infrastructure/server/express'))
 
 /* =============== Instances ==================== */
 
